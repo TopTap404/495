@@ -10,11 +10,11 @@ import requests
 
 # โหลดโมเดล YOLO
 model = YOLO('C:/Users/topta/OneDrive/Desktop/final495/python/best.pt')
-cap = cv2.VideoCapture('C:/Users/topta/OneDrive/Desktop/final495/python/project.mp4')
+cap = cv2.VideoCapture('C:/Users/topta/OneDrive/Desktop/final495/python/final.mp4')
 if not cap.isOpened():
     print(f"❌ เปิดวิดีโอไม่ได้")
     exit()
-TARGET_RESOLUTION = (1920, 1080)
+TARGET_RESOLUTION = (1280, 720)
 fps = int(cap.get(cv2.CAP_PROP_FPS))
 
 # Track คน
@@ -26,7 +26,7 @@ frame_count = 0
 start_time = time.time()
 
 # สำหรับสรุปทุก 30 วินาที
-summary_interval = 5  # วินาที
+summary_interval = 10  # วินาที
 last_summary_time = time.time()
 summary_index = 1
 

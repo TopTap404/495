@@ -9,8 +9,8 @@ import torch
 import requests
 
 # โหลดโมเดล YOLO
-model = YOLO('C:/Users/topta/OneDrive/Desktop/api/best.pt')
-cap = cv2.VideoCapture('C:/Users/topta/OneDrive/Desktop/api/project.mp4')
+model = YOLO('C:/Users/topta/OneDrive/Desktop/final495/python/best.pt')
+cap = cv2.VideoCapture('C:/Users/topta/OneDrive/Desktop/final495/python/project.mp4')
 if not cap.isOpened():
     print(f"❌ เปิดวิดีโอไม่ได้")
     exit()

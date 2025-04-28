@@ -15,6 +15,12 @@
     <div class="container">
         <div class="dashboard-header">Dashboard</div>
         <div class="grid-container">
+            <div class="square-card">
+                <div>Select Date Range</div>
+                <input type="date" id="startDate">
+                <input type="date" id="endDate">
+                <button onclick="loadWithDateRange()">Load</button>
+            </div>
             <div class="side-panel">
                 <div class="square-card">Total Students <div class="big-text" id="totalStudents">--</div></div>
                 <div class="square-card">Behavior Avg <div class="big-text" id="behaviorAvg">--</div></div>

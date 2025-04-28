@@ -55,9 +55,19 @@ app.post('/postroomdata', (req, res) => {
 
 // GET ข้อมูลสรุปสำหรับ dashboard
 app.get('/getroomdata', (req, res) => {
-    const sql = 'SELECT * FROM room_behavior ORDER BY timestamp DESC';
+    const { start, end } = req.query;
 
-    db.query(sql, (err, results) => {
+    let sql = 'SELECT * FROM room_behavior';
+    let params = [];
+
+    if (start && end) {
+        sql += ' WHERE timestamp BETWEEN ? AND ?';
+        params.push(`${start} 00:00:00`, `${end} 23:59:59`);
+    }
+
+    sql += ' ORDER BY timestamp DESC';
+
+    db.query(sql, params, (err, results) => {
         if (err) {
             console.error('❌ เกิดข้อผิดพลาดขณะดึงข้อมูล:', err);
             return res.status(500).json({ error: 'Database error' });

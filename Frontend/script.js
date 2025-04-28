@@ -4,6 +4,40 @@ let peoplePerHourChart;
 let peoplePerDayChart;
 let behaviorPercentChart;
 
+async function loadWithDateRange() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    let url = API_URL;
+    if (startDate && endDate) {
+        url += `?start=${startDate}&end=${endDate}`;
+    }
+
+    const totalStudentsElement = document.getElementById('totalStudents');
+    const behaviorAvgElement = document.getElementById('behaviorAvg');
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Received data (date range):", data);
+
+        // รีเซ็ตค่า
+        totalStudentsElement.textContent = data.totalStudents ?? "--";
+        behaviorAvgElement.textContent = data.behaviorAvg ?? "--";
+
+        // อัปเดตกราฟ
+        updateCharts(data);
+    } catch (error) {
+        console.error('Error fetching room data:', error);
+        totalStudentsElement.textContent = "--";
+        behaviorAvgElement.textContent = "--";
+    }
+}
+
 async function fetchRoomData() {
     const totalStudentsElement = document.getElementById('totalStudents');
     const behaviorAvgElement = document.getElementById('behaviorAvg');
